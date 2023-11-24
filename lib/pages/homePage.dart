@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:test1/modals/movie.dart';
 import 'package:test1/modals/movie_category.dart';
 import 'package:test1/modals/movie_type_catgory.dart';
+import 'package:test1/pages/movieDetail.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -18,16 +20,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   int _currentSlide = 3;
   int _defaultSlide = 0;
-  // get movie category
-  static List<MovieCategory> movieList = MovieCategory.getCategory();
-  static List<movieTypeCategories> movieTypeList =
-      movieTypeCategories.getMovieTypeCategory();
-
-  final color = [
-    Colors.red,
-    Colors.blue,
-    Colors.amberAccent,
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,33 +32,40 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: appBar(),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // search bar
-            textField(),
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // search bar
+              textField(),
 
-            const SizedBox(
-              height: 20,
-            ),
+              const SizedBox(
+                height: 20,
+              ),
 
-            // popular category
-            popularCategory(context),
+              // popular category
+              popularCategory(context),
 
-            const SizedBox(
-              height: 12,
-            ),
+              const SizedBox(
+                height: 12,
+              ),
 
-            // filmType category
-            categoryMenu(),
+              // filmType category
+              categoryMenu(),
 
-            const SizedBox(
-              height: 12,
-            ),
+              const SizedBox(
+                height: 12,
+              ),
 
-            // upcoming
-            upcomingReleases()
-          ],
+              // upcoming
+              upcomingReleases(),
+
+              const SizedBox(
+                height: 12,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -79,7 +78,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       height: 95,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: movieTypeList.length,
+        itemCount: movieTypeCategory.length,
         itemBuilder: (context, index) => Container(
           margin: const EdgeInsets.only(right: 9),
           height: 95,
@@ -98,7 +97,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               Container(
                 margin: const EdgeInsets.only(bottom: 8),
                 child: SvgPicture.asset(
-                  movieTypeList[index].icon,
+                  movieTypeCategory[index]['icon'],
                   height: 30,
                   width: 30,
                   // ignore: deprecated_member_use
@@ -106,7 +105,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ),
               ),
               Text(
-                movieTypeList[index].name,
+                movieTypeCategory[index]['name'],
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 9,
@@ -145,18 +144,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             }),
             controller: PageController(
               initialPage: 2,
-              viewportFraction: 0.5,
+              viewportFraction: 0.4,
             ),
-            itemCount: movieList.length,
+            itemCount: movies.length,
             itemBuilder: (context, index) {
               return Container(
-                margin: const EdgeInsets.all(8),
-                width: 150,
+                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                // width: 145,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
                     image: AssetImage(
-                      movieList[index].imagePath,
+                      movies[index].imagePath,
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -168,7 +167,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         Center(
           child: TabPageSelector(
             controller: TabController(
-              length: movieList.length,
+              length: movies.length,
               initialIndex: _defaultSlide,
               vsync: this,
             ),
@@ -210,77 +209,91 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       });
                     },
                     // render
-                    itemCount: movieList.length,
+                    itemCount: movies.length,
                     controller: PageController(
                       viewportFraction: 0.75,
                       initialPage: 3,
                     ),
                     itemBuilder: (context, index) {
+                      // data
+                      // final movieData = movieList[index];
                       // render
-                      return Stack(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: const EdgeInsets.all(8),
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
+                      return InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => MovieDetailPage(),
                             ),
-                            child: Image.asset(
-                              movieList[index % movieList.length].imagePath,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-
-                          // text over image
-                          Container(
-                            alignment: Alignment.bottomLeft,
-                            margin: const EdgeInsets.only(left: 26, bottom: 15),
-                            child: Text(
-                              movieList[index % movieList.length].name,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-
-                          // imdb point
-                          Container(
-                            alignment: Alignment.bottomRight,
-                            margin: EdgeInsets.only(right: 30, bottom: 18),
-                            child: Container(
-                              width: 44,
-                              height: 14,
+                          );
+                        },
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin: const EdgeInsets.all(8),
+                              clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
-                                color: Color(0xffF5C518),
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(25),
                               ),
-                              child: Center(
-                                child: Text(
-                                  "IMDB ${movieList[index % movieList.length].imdb_point}",
-                                  style: const TextStyle(
-                                      fontSize: 6, fontWeight: FontWeight.bold),
-                                ),
+                              child: Image.asset(
+                                movies[index].imagePath,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          ),
 
-                          // blur item not centered
-                          Positioned.fill(
-                            child: Visibility(
-                              visible: index != _currentSlide,
-                              child: Container(
-                                margin: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25),
-                                  color: Colors.black.withOpacity(0.5),
+                            // text over image
+                            Container(
+                              alignment: Alignment.bottomLeft,
+                              margin:
+                                  const EdgeInsets.only(left: 26, bottom: 15),
+                              child: Text(
+                                movies[index].name,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+
+                            // imdb point
+                            Container(
+                              alignment: Alignment.bottomRight,
+                              margin:
+                                  const EdgeInsets.only(right: 30, bottom: 18),
+                              child: Container(
+                                width: 44,
+                                height: 14,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffF5C518),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "IMDb ${movies[index].imdb_point}",
+                                    style: const TextStyle(
+                                        fontSize: 6,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            // blur item not centered
+                            Positioned.fill(
+                              child: Visibility(
+                                visible: index != _currentSlide,
+                                child: Container(
+                                  margin: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    color: Colors.black.withOpacity(0.5),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       );
                     },
                   ),
@@ -289,7 +302,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 // slider dot
                 TabPageSelector(
                   controller: TabController(
-                    length: movieList.length,
+                    length: movies.length,
                     initialIndex: _currentSlide,
                     vsync: this,
                   ),
