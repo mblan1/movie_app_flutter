@@ -216,13 +216,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                     itemBuilder: (context, index) {
                       // data
-                      // final movieData = movieList[index];
+                      final movieData = movies[index];
                       // render
                       return InkWell(
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => MovieDetailPage(),
+                              builder: (context) => MovieDetailPage(
+                                movieCategory: movieData,
+                              ),
                             ),
                           );
                         },

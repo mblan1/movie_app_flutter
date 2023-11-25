@@ -1,96 +1,181 @@
 List<Map<String, dynamic>> movieData = [
   {
-    'name': 'Deadpool',
+    'name': 'Oppenheimer',
+    "subtitle": "Oppenheimer",
     'description':
-        "Marvel's The Avengers[5] (classified under the name Marvel Avengers Assemble in the United Kingdom and Ireland),[1][6] or simply The Avengers, is a 2012 American superhero film based on the Marvel Comics superhero team of the same name. Produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures,[a] it is the sixth film in the Marvel Cinematic Universe (MCU). Written and directed by Joss Whedon, the film features an ensemble cast including Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth, Scarlett Johansson, and Jeremy Renner as the Avengers, alongside Tom Hiddleston, Stellan Skarsgård, and Samuel L. Jackson. In the film, Nick Fury and the spy agency S.H.I.E.L.D. recruit Tony Stark, Steve Rogers, Bruce Banner, Thor, Natasha Romanoff, and Clint Barton to form a team capable of stopping Thor's brother Loki from subjugating Earth.",
+        "During World War II, Lt. Gen. Leslie Groves Jr. appoints physicist J. Robert Oppenheimer to work on the top-secret Manhattan Project. Oppenheimer and a team of scientists spend years developing and designing the atomic bomb. Their work comes to fruition on July 16, 1945, as they witness the world's first nuclear explosion, forever changing the course of history.",
     "age": 16,
-    "imagePath": "assets/images/deadpool2.jpg",
-    "imdb_point": 6,
+    "imagePath": "assets/oppenheimer/oppenheimer.jpg",
+    "imdb_point": 8.5,
     "videoUrl": "https://www.youtube.com/watch?v=ONHBaC-pfsk",
+    "type": "Drama",
     'cast': [
       {
-        'name': 'Lion',
-        'role': 'actor',
+        'name': 'Cillian Murphy',
+        'role': 'J. Robert Oppen',
+        "castAvtUrl": "assets/oppenheimer/cast1.jpg"
       },
       {
-        'name': 'anna',
-        'role': 'no',
+        'name': 'Florence Pugh',
+        'role': 'Jean Tatlock',
+        "castAvtUrl": "assets/oppenheimer/cast2.jpg"
+      },
+      {
+        'name': 'Robert Downey Jr.',
+        'role': 'Lewis Strauss',
+        "castAvtUrl": "assets/oppenheimer/cast3.jpg"
+      },
+      {
+        'name': 'Emily Blunt',
+        'role': 'Katherine Oppenh',
+        "castAvtUrl": "assets/oppenheimer/cast4.jpg"
       },
     ],
   },
   {
-    'name': 'Deadpool',
+    'name': 'Spider-Man',
+    "subtitle": "Spider-Man: Across the Spider-Verse",
     'description':
-        "Marvel's The Avengers[5] (classified under the name Marvel Avengers Assemble in the United Kingdom and Ireland),[1][6] or simply The Avengers, is a 2012 American superhero film based on the Marvel Comics superhero team of the same name. Produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures,[a] it is the sixth film in the Marvel Cinematic Universe (MCU). Written and directed by Joss Whedon, the film features an ensemble cast including Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth, Scarlett Johansson, and Jeremy Renner as the Avengers, alongside Tom Hiddleston, Stellan Skarsgård, and Samuel L. Jackson. In the film, Nick Fury and the spy agency S.H.I.E.L.D. recruit Tony Stark, Steve Rogers, Bruce Banner, Thor, Natasha Romanoff, and Clint Barton to form a team capable of stopping Thor's brother Loki from subjugating Earth.",
+        "After reuniting with Gwen Stacy, Brooklyn's full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters a team of Spider-People charged with protecting its very existence. However, when the heroes clash on how to handle a new threat, Miles finds himself pitted against the other Spiders. He must soon redefine what it means to be a hero so he can save the people he loves most.",
     "age": 16,
-    "imagePath": "assets/images/deadpool2.jpg",
-    "imdb_point": 6,
+    "imagePath": "assets/spiderman/spiderman.jpg",
+    "imdb_point": 8.7,
     "videoUrl": "https://www.youtube.com/watch?v=ONHBaC-pfsk",
+    "type": "Action",
     'cast': [
       {
-        'name': 'Lion',
-        'role': 'actor',
+        'name': 'Oscar Isaac',
+        'role': 'Spider-Man 2099',
+        "castAvtUrl": "assets/spiderman/cast1.jpg"
       },
       {
-        'name': 'anna',
-        'role': 'no',
+        'name': 'Hailee Steinfeld',
+        'role': 'Gwen Stacy',
+        "castAvtUrl": "assets/spiderman/cast2.jpg"
+      },
+      {
+        'name': 'Jason Schwartzman',
+        'role': 'Spot',
+        "castAvtUrl": "assets/spiderman/cast3.jpg"
+      },
+      {
+        'name': 'Shameik Moore',
+        'role': 'Miles Morales',
+        "castAvtUrl": "assets/spiderman/cast4.jpg"
+      },
+      {
+        'name': 'Daniel Kaluuya',
+        'role': 'Spider-Punk',
+        "castAvtUrl": "assets/spiderman/cast5.jpg"
       },
     ],
   },
   {
-    'name': 'Deadpool',
+    'name': 'Guardians of the Galaxy',
+    "subtitle": "Guardians of the Galaxy Vol. 3",
     'description':
-        "Marvel's The Avengers[5] (classified under the name Marvel Avengers Assemble in the United Kingdom and Ireland),[1][6] or simply The Avengers, is a 2012 American superhero film based on the Marvel Comics superhero team of the same name. Produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures,[a] it is the sixth film in the Marvel Cinematic Universe (MCU). Written and directed by Joss Whedon, the film features an ensemble cast including Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth, Scarlett Johansson, and Jeremy Renner as the Avengers, alongside Tom Hiddleston, Stellan Skarsgård, and Samuel L. Jackson. In the film, Nick Fury and the spy agency S.H.I.E.L.D. recruit Tony Stark, Steve Rogers, Bruce Banner, Thor, Natasha Romanoff, and Clint Barton to form a team capable of stopping Thor's brother Loki from subjugating Earth.",
+        "Still reeling from the loss of Gamora, Peter Quill must rally his team to defend the universe and protect one of their own. If the mission is not completely successful, it could possibly lead to the end of the Guardians as we know them.",
     "age": 16,
-    "imagePath": "assets/images/deadpool2.jpg",
-    "imdb_point": 6,
+    "imagePath": "assets/gog/gog.jpg",
+    "imdb_point": 7.9,
     "videoUrl": "https://www.youtube.com/watch?v=ONHBaC-pfsk",
+    "type": "Action",
     'cast': [
       {
-        'name': 'Lion',
-        'role': 'actor',
+        'name': 'Chris Pratt',
+        'role': 'Peter Quill',
+        "castAvtUrl": "assets/gog/cast1.jpg"
       },
       {
-        'name': 'anna',
-        'role': 'no',
+        'name': 'Zoe Saldana',
+        'role': 'Gamora',
+        "castAvtUrl": "assets/gog/cast2.jpg"
+      },
+      {
+        'name': 'Will Poulter',
+        'role': 'Adam Warlock',
+        "castAvtUrl": "assets/gog/cast3.jpg"
+      },
+      {
+        'name': 'Sean Gunn',
+        'role': 'Kraglin',
+        "castAvtUrl": "assets/gog/cast4.jpg"
+      },
+      {
+        'name': 'Karen Gillan',
+        'role': 'Nebula',
+        "castAvtUrl": "assets/gog/cast5.jpg"
+      },
+      {
+        'name': 'Vin Diesel',
+        'role': 'Groot',
+        "castAvtUrl": "assets/gog/cast6.jpg"
       },
     ],
   },
   {
-    'name': 'Deadpool',
+    'name': 'Mission: Impossible',
+    "subtitle": "Dead Reckoning Part One",
     'description':
-        "Marvel's The Avengers[5] (classified under the name Marvel Avengers Assemble in the United Kingdom and Ireland),[1][6] or simply The Avengers, is a 2012 American superhero film based on the Marvel Comics superhero team of the same name. Produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures,[a] it is the sixth film in the Marvel Cinematic Universe (MCU). Written and directed by Joss Whedon, the film features an ensemble cast including Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth, Scarlett Johansson, and Jeremy Renner as the Avengers, alongside Tom Hiddleston, Stellan Skarsgård, and Samuel L. Jackson. In the film, Nick Fury and the spy agency S.H.I.E.L.D. recruit Tony Stark, Steve Rogers, Bruce Banner, Thor, Natasha Romanoff, and Clint Barton to form a team capable of stopping Thor's brother Loki from subjugating Earth.",
+        "Ethan Hunt and the IMF team must track down a terrifying new weapon that threatens all of humanity if it falls into the wrong hands. With control of the future and the fate of the world at stake, a deadly race around the globe begins. Confronted by a mysterious, all-powerful enemy, Ethan is forced to consider that nothing can matter more than the mission -- not even the lives of those he cares about most.",
     "age": 16,
-    "imagePath": "assets/images/deadpool2.jpg",
-    "imdb_point": 6,
+    "imagePath": "assets/mi/mi.jpg",
+    "imdb_point": 7.8,
     "videoUrl": "https://www.youtube.com/watch?v=ONHBaC-pfsk",
+    "type": "Action",
     'cast': [
       {
-        'name': 'Lion',
-        'role': 'actor',
+        'name': 'Tom Cruise',
+        'role': 'Ethan Hunt',
+        "castAvtUrl": "assets/mi/cast1.jpg"
       },
       {
-        'name': 'anna',
-        'role': 'no',
+        'name': 'Hayley Atwell',
+        'role': 'Grace',
+        "castAvtUrl": "assets/mi/cast2.jpg"
+      },
+      {
+        'name': 'Vanessa Kirby',
+        'role': 'Alanna Mitsopolis',
+        "castAvtUrl": "assets/mi/cast3.jpg"
+      },
+      {
+        'name': 'Rebecca Ferguson',
+        'role': 'Ilsa Faust',
+        "castAvtUrl": "assets/mi/cast4.jpg"
       },
     ],
   },
   {
-    'name': 'Deadpool',
+    'name': 'Suzume',
+    "subtitle": "Suzume no Tojimari",
     'description':
-        "Marvel's The Avengers[5] (classified under the name Marvel Avengers Assemble in the United Kingdom and Ireland),[1][6] or simply The Avengers, is a 2012 American superhero film based on the Marvel Comics superhero team of the same name. Produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures,[a] it is the sixth film in the Marvel Cinematic Universe (MCU). Written and directed by Joss Whedon, the film features an ensemble cast including Robert Downey Jr., Chris Evans, Mark Ruffalo, Chris Hemsworth, Scarlett Johansson, and Jeremy Renner as the Avengers, alongside Tom Hiddleston, Stellan Skarsgård, and Samuel L. Jackson. In the film, Nick Fury and the spy agency S.H.I.E.L.D. recruit Tony Stark, Steve Rogers, Bruce Banner, Thor, Natasha Romanoff, and Clint Barton to form a team capable of stopping Thor's brother Loki from subjugating Earth.",
-    "age": 16,
-    "imagePath": "assets/images/deadpool2.jpg",
-    "imdb_point": 6,
+        "As the skies turn red and the planet trembles, Japan stands on the brink of disaster. However, a determined teenager named Suzume sets out on a mission to save her country. Able to see supernatural forces that others cannot, it's up to her to close the mysterious doors that are spreading chaos across the land. A perilous journey awaits as the fate of Japan rests on her shoulders.",
+    "age": 12,
+    "imagePath": "assets/suzume/suzume.jpg",
+    "imdb_point": 7.7,
     "videoUrl": "https://www.youtube.com/watch?v=ONHBaC-pfsk",
+    "type": "Animation",
     'cast': [
       {
-        'name': 'Lion',
-        'role': 'actor',
+        'name': 'Nanoka Hara',
+        'role': 'Suzume Iwato',
+        "castAvtUrl": "assets/suzume/cast1.jpg"
       },
       {
-        'name': 'anna',
-        'role': 'no',
+        'name': 'Eri Fukatsu',
+        'role': 'Tamaki Iwato',
+        "castAvtUrl": "assets/suzume/cast2.jpg"
+      },
+      {
+        'name': 'Kana Hanazawa',
+        'role': 'Tsubame Iwato',
+        "castAvtUrl": "assets/suzume/cast3.jpg"
+      },
+      {
+        'name': 'Shota Sometani',
+        'role': 'Minoru Okabe',
+        "castAvtUrl": "assets/suzume/cast4.jpg"
       },
     ],
   },
@@ -104,16 +189,19 @@ List<Movie> movies = movieData.map((movie) {
       imdb_point: (movie['imdb_point']).toDouble(),
       age: movie['age'],
       videoUrl: movie['videoUrl'],
+      type: movie['type'],
+      subtitle: movie['subtitle'],
       cast: (movie['cast'] as List?)!.map((cast) {
         return Cast(
           name: cast['name'],
           role: cast['role'],
+          castAvtUrl: cast['castAvtUrl'],
         );
       }).toList());
 }).toList();
 
 class Movie {
-  final String name, description, imagePath, videoUrl;
+  final String name, description, imagePath, videoUrl, type, subtitle;
   final int age;
   final double imdb_point;
   final List<Cast> cast;
@@ -125,6 +213,8 @@ class Movie {
     required this.imdb_point,
     required this.age,
     required this.videoUrl,
+    required this.type,
+    required this.subtitle,
     required this.cast,
   });
 }
@@ -132,9 +222,11 @@ class Movie {
 class Cast {
   String name;
   String role;
+  String castAvtUrl;
 
   Cast({
     required this.name,
     required this.role,
+    required this.castAvtUrl,
   });
 }

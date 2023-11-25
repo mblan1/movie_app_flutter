@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:test1/BottomBar/CustomBottomBar.dart';
 import 'package:test1/modals/movie.dart';
-import 'package:test1/modals/movie_category.dart';
 
 class MovieDetailPage extends StatefulWidget {
-  // final MovieCategory movieCategory;
+  final Movie movieCategory;
 
-  const MovieDetailPage({Key? key}) : super(key: key);
+  const MovieDetailPage({Key? key, required this.movieCategory})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
     // ignore: no_logic_in_create_state
-    return _MovieDetailPage();
+    return _MovieDetailPage(movieData: movieCategory);
   }
 }
 
 class _MovieDetailPage extends State<MovieDetailPage> {
-  // final MovieCategory movieData;
+  final Movie movieData;
 
-  // _MovieDetailPage({required this.movieData});
+  _MovieDetailPage({required this.movieData});
 
   @override
   Widget build(BuildContext context) {
@@ -41,17 +41,20 @@ class _MovieDetailPage extends State<MovieDetailPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/deadpool2.jpg"),
+            // background image
+            image: AssetImage(movieData.imagePath),
             fit: BoxFit.cover,
           ),
         ),
         child: DraggableScrollableSheet(
           minChildSize: 0.5,
+          maxChildSize: 0.5,
           builder: (context, scrollController) {
             return SingleChildScrollView(
+              // physics: const BouncingScrollPhysics(),
               controller: scrollController,
               child: Container(
-                // height: 1000,
+                // height: MediaQuery.of(context).size.height * 0.8,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(colors: [
                     Color(0xff2B5876),
@@ -94,6 +97,8 @@ class _MovieDetailPage extends State<MovieDetailPage> {
   }
 
   Container MovieCast() {
+    // cast
+    List<Cast> castData = movieData.cast;
     return Container(
       padding: const EdgeInsets.only(top: 16),
       child: Column(
@@ -127,7 +132,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
           // list cast
           Container(
             padding: const EdgeInsets.only(top: 8),
-            height: 200,
+            height: 160,
             child: Row(
               children: [
                 Expanded(
@@ -137,7 +142,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
                     ),
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
-                    itemCount: 5,
+                    itemCount: castData.length,
                     itemBuilder: (context, index) {
                       return SizedBox(
                         child: Column(
@@ -150,7 +155,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
                                 borderRadius: BorderRadius.circular(15),
                                 image: DecorationImage(
                                   image: AssetImage(
-                                    "assets/images/deadpool2.jpg",
+                                    castData[index].castAvtUrl,
                                   ),
                                   fit: BoxFit.cover,
                                 ),
@@ -164,8 +169,8 @@ class _MovieDetailPage extends State<MovieDetailPage> {
                               child: Column(
                                 children: [
                                   // cast real name
-                                  const Text(
-                                    "Ryan Reynolds",
+                                  Text(
+                                    castData[index].name,
                                     textDirection: TextDirection.rtl,
                                     softWrap: true,
                                     textAlign: TextAlign.center,
@@ -179,7 +184,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
                                   Container(
                                     padding: EdgeInsets.only(top: 4),
                                     child: Text(
-                                      "Deadpool",
+                                      castData[index].role,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: 12,
@@ -208,7 +213,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
     return Container(
       padding: const EdgeInsets.only(top: 16),
       child: ReadMoreText(
-        "Deadpool",
+        movieData.description,
         style: const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w500,
@@ -251,8 +256,10 @@ class _MovieDetailPage extends State<MovieDetailPage> {
                 decoration: BoxDecoration(
                     color: Colors.white.withOpacity(.1),
                     borderRadius: BorderRadius.circular(20)),
-                child: Text(
-                  "Action",
+                child:
+                    // Movie Type
+                    Text(
+                  movieData.type,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
@@ -272,7 +279,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
                     color: Colors.white.withOpacity(.1),
                     borderRadius: BorderRadius.circular(20)),
                 child: Text(
-                  "16+",
+                  "${movieData.age}+",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
@@ -295,11 +302,12 @@ class _MovieDetailPage extends State<MovieDetailPage> {
                     text: "IMDb ",
                     children: [
                       TextSpan(
-                        text: "12.0",
+                        text: "${movieData.imdb_point}",
                         style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            height: 1.4),
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          height: 1.4,
+                        ),
                       )
                     ],
                     style: const TextStyle(
@@ -342,7 +350,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
     return Container(
       padding: const EdgeInsets.only(top: 4),
       child: Text(
-        "The Dark World",
+        movieData.subtitle,
         style: TextStyle(
           color: Colors.white.withOpacity(0.5),
         ),
@@ -354,7 +362,8 @@ class _MovieDetailPage extends State<MovieDetailPage> {
     return Container(
       padding: const EdgeInsets.only(top: 8),
       child: Text(
-        "Deadpool",
+        movieData.name,
+        textAlign: TextAlign.center,
         style: const TextStyle(
           color: Colors.white,
           fontSize: 36,
