@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:test1/BottomBar/CustomBottomBar.dart';
 import 'package:test1/modals/movie.dart';
+import 'package:test1/pages/watchMoviePage.dart';
 
 class MovieDetailPage extends StatefulWidget {
   final Movie movieCategory;
@@ -38,61 +39,94 @@ class _MovieDetailPage extends State<MovieDetailPage> {
           ),
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            // background image
-            image: AssetImage(movieData.imagePath),
-            fit: BoxFit.cover,
+      body: Stack(children: [
+        // movie
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              // background image
+              image: AssetImage(movieData.imagePath),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child: DraggableScrollableSheet(
-          minChildSize: 0.5,
-          maxChildSize: 0.5,
-          builder: (context, scrollController) {
-            return SingleChildScrollView(
-              // physics: const BouncingScrollPhysics(),
-              controller: scrollController,
-              child: Container(
-                // height: MediaQuery.of(context).size.height * 0.8,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                    Color(0xff2B5876),
-                    Color(0xff4E4376),
-                  ]),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40),
+          child: DraggableScrollableSheet(
+            minChildSize: 0.5,
+            maxChildSize: 0.5,
+            builder: (context, scrollController) {
+              return SingleChildScrollView(
+                // physics: const BouncingScrollPhysics(),
+                controller: scrollController,
+                child: Container(
+                  // height: MediaQuery.of(context).size.height * 0.8,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                      Color(0xff2B5876),
+                      Color(0xff4E4376),
+                    ]),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 50, right: 50),
+                    child: Column(children: [
+                      // icon
+                      const SizedBox(
+                        child: Icon(Icons.drag_handle, color: Colors.white),
+                      ),
+
+                      // movie title
+                      MovieTitle(),
+                      MovieSubTitle(),
+
+                      // Detail
+                      MovieDetail(),
+
+                      // movie description
+                      MovieDesc(),
+
+                      // CAST
+                      MovieCast(),
+                    ]),
                   ),
                 ),
-                child: Container(
-                  padding: const EdgeInsets.only(left: 50, right: 50),
-                  child: Column(children: [
-                    // icon
-                    const SizedBox(
-                      child: Icon(Icons.drag_handle, color: Colors.white),
-                    ),
-
-                    // movie title
-                    MovieTitle(),
-                    MovieSubTitle(),
-
-                    // Detail
-                    MovieDetail(),
-
-                    // movie description
-                    MovieDesc(),
-
-                    // CAST
-                    MovieCast(),
-                  ]),
-                ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
-      ),
-      bottomNavigationBar: CustomBottomBar(),
+
+        // play button
+        Container(
+          padding: const EdgeInsets.only(top: 100),
+          child: Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.4),
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return WatchMoviePage(
+                        movieData: movieData,
+                      );
+                    }));
+                  },
+                  icon: const Icon(
+                    Icons.play_arrow,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                ),
+              )),
+        ),
+      ]),
+      bottomNavigationBar: const CustomBottomBar(),
     );
   }
 
@@ -104,29 +138,27 @@ class _MovieDetailPage extends State<MovieDetailPage> {
       child: Column(
         children: [
           // title
-          Container(
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Cast",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Cast",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
+              ),
 
-                // see all
-                Text(
-                  "See all",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
+              // see all
+              Text(
+                "See all",
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
 
           // list cast
@@ -174,7 +206,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
                                     textDirection: TextDirection.rtl,
                                     softWrap: true,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12,
                                       color: Colors.white,
                                     ),

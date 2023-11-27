@@ -7,7 +7,8 @@ List<Map<String, dynamic>> movieData = [
     "age": 16,
     "imagePath": "assets/oppenheimer/oppenheimer.jpg",
     "imdb_point": 8.5,
-    "videoUrl": "https://www.youtube.com/watch?v=ONHBaC-pfsk",
+    "videoUrl":
+        "https://www.youtube.com/watch?v=uYPbbksJxIg&pp=ygUTb3BwZW5oZWltZXIgdHJhaWxlcg%3D%3D",
     "type": "Drama",
     'cast': [
       {
@@ -40,7 +41,8 @@ List<Map<String, dynamic>> movieData = [
     "age": 16,
     "imagePath": "assets/spiderman/spiderman.jpg",
     "imdb_point": 8.7,
-    "videoUrl": "https://www.youtube.com/watch?v=ONHBaC-pfsk",
+    "videoUrl":
+        "https://www.youtube.com/watch?v=shW9i6k8cB0&pp=ygUic3BpZGVyIG1hbiBhY3Jvc3MgdGhlIHNwaWRlciB2ZXJzZQ%3D%3D",
     "type": "Action",
     'cast': [
       {
@@ -78,7 +80,8 @@ List<Map<String, dynamic>> movieData = [
     "age": 16,
     "imagePath": "assets/gog/gog.jpg",
     "imdb_point": 7.9,
-    "videoUrl": "https://www.youtube.com/watch?v=ONHBaC-pfsk",
+    "videoUrl":
+        "https://www.youtube.com/watch?v=JqcncLPi9zw&pp=ygUJR29HIHZvbCAz",
     "type": "Action",
     'cast': [
       {
@@ -121,7 +124,8 @@ List<Map<String, dynamic>> movieData = [
     "age": 16,
     "imagePath": "assets/mi/mi.jpg",
     "imdb_point": 7.8,
-    "videoUrl": "https://www.youtube.com/watch?v=ONHBaC-pfsk",
+    "videoUrl":
+        "https://www.youtube.com/watch?v=avz06PDqDbM&pp=ygUSbWlzc2lvbiBpbXBvc3NpYmxl",
     "type": "Action",
     'cast': [
       {
@@ -154,7 +158,8 @@ List<Map<String, dynamic>> movieData = [
     "age": 12,
     "imagePath": "assets/suzume/suzume.jpg",
     "imdb_point": 7.7,
-    "videoUrl": "https://www.youtube.com/watch?v=ONHBaC-pfsk",
+    "videoUrl":
+        "https://www.youtube.com/watch?v=5pTcio2hTSw&pp=ygUOc3V6dW1lIHRyYWlsZXI%3D",
     "type": "Animation",
     'cast': [
       {

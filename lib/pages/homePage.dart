@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:test1/BottomBar/CustomBottomBar.dart';
 import 'package:test1/modals/movie.dart';
-import 'package:test1/modals/movie_category.dart';
 import 'package:test1/modals/movie_type_catgory.dart';
 import 'package:test1/pages/movieDetail.dart';
 
@@ -67,6 +67,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ],
           ),
         ),
+        bottomNavigationBar: CustomBottomBar(),
       ),
     );
   }
