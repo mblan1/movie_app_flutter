@@ -392,6 +392,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 // app bar
   AppBar appBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       toolbarHeight: 60,
       backgroundColor: Colors.transparent,
       elevation: 0,
@@ -412,12 +413,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       // icon bell
       actions: [
         Container(
-          padding: const EdgeInsets.only(right: 35),
+          padding: const EdgeInsets.only(right: 12),
           child: SvgPicture.asset(
             'assets/icons/notification-bell.svg',
             height: 20,
             width: 20,
             // ignore: deprecated_member_use
+            color: Colors.white,
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, "/loginPage");
+          },
+          icon: const Icon(
+            Icons.logout,
             color: Colors.white,
           ),
         ),

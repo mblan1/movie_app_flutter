@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test1/pages/fullScreenVideo.dart';
 import 'package:test1/pages/homePage.dart';
-import 'package:test1/pages/movieDetail.dart';
-import 'package:test1/pages/watchMoviePage.dart';
-import 'package:test1/pages/youtubePlayer.dart';
+import 'package:test1/pages/loginPage.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -16,8 +13,12 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
+      routes: {
+        "/homePage": (context) => HomePage(),
+        "/loginPage": (context) => LoginPage(),
+      },
     );
   }
 }
