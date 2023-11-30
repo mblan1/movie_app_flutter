@@ -7,14 +7,10 @@ class WatchMoviePage extends StatefulWidget {
   const WatchMoviePage({Key? key, required this.movieData}) : super(key: key);
 
   @override
-  // ignore: no_logic_in_create_state
-  State<StatefulWidget> createState() => _WatchMoviePageState(movie: movieData);
+  State<StatefulWidget> createState() => _WatchMoviePageState();
 }
 
 class _WatchMoviePageState extends State<WatchMoviePage> {
-  final Movie _movie;
-  _WatchMoviePageState({required Movie movie}) : _movie = movie;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +31,7 @@ class _WatchMoviePageState extends State<WatchMoviePage> {
         child: Column(
           children: [
             YoutubePlayerAppPage(
-              videoURL: _movie.videoUrl,
+              videoURL: widget.movieData.videoUrl,
             ),
             Container(
               padding: const EdgeInsets.all(16),
@@ -43,7 +39,7 @@ class _WatchMoviePageState extends State<WatchMoviePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    _movie.name,
+                    widget.movieData.name,
                     style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

@@ -26,6 +26,12 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -65,11 +71,5 @@ class _VideoPlayerState extends State<VideoPlayerPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }

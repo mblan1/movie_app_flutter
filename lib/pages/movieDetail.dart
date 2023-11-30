@@ -5,23 +5,17 @@ import 'package:test1/modals/movie.dart';
 import 'package:test1/pages/watchMoviePage.dart';
 
 class MovieDetailPage extends StatefulWidget {
-  final Movie movieCategory;
+  final Movie movieData;
 
-  const MovieDetailPage({Key? key, required this.movieCategory})
-      : super(key: key);
+  const MovieDetailPage({Key? key, required this.movieData}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    // ignore: no_logic_in_create_state
-    return _MovieDetailPage(movieData: movieCategory);
+    return _MovieDetailPage();
   }
 }
 
 class _MovieDetailPage extends State<MovieDetailPage> {
-  final Movie movieData;
-
-  _MovieDetailPage({required this.movieData});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,12 +39,12 @@ class _MovieDetailPage extends State<MovieDetailPage> {
           decoration: BoxDecoration(
             image: DecorationImage(
               // background image
-              image: AssetImage(movieData.imagePath),
+              image: AssetImage(widget.movieData.imagePath),
               fit: BoxFit.cover,
             ),
           ),
           child: DraggableScrollableSheet(
-            minChildSize: 0.5,
+            minChildSize: 0.3,
             maxChildSize: 0.5,
             builder: (context, scrollController) {
               return SingleChildScrollView(
@@ -97,42 +91,45 @@ class _MovieDetailPage extends State<MovieDetailPage> {
         ),
 
         // play button
-        Container(
-          padding: const EdgeInsets.only(top: 100),
-          child: Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.4),
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return WatchMoviePage(
-                        movieData: movieData,
-                      );
-                    }));
-                  },
-                  icon: const Icon(
-                    Icons.play_arrow,
-                    color: Colors.white,
-                    size: 40,
-                  ),
-                ),
-              )),
-        ),
+        playBtn(context),
       ]),
       bottomNavigationBar: const CustomBottomBar(),
     );
   }
 
+  Container playBtn(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(top: 160),
+      child: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.4),
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return WatchMoviePage(
+                    movieData: widget.movieData,
+                  );
+                }));
+              },
+              icon: const Icon(
+                Icons.play_arrow,
+                color: Colors.white,
+                size: 40,
+              ),
+            ),
+          )),
+    );
+  }
+
   Container MovieCast() {
     // cast
-    List<Cast> castData = movieData.cast;
+    List<Cast> castData = widget.movieData.cast;
     return Container(
       padding: const EdgeInsets.only(top: 16),
       child: Column(
@@ -245,7 +242,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
     return Container(
       padding: const EdgeInsets.only(top: 16),
       child: ReadMoreText(
-        movieData.description,
+        widget.movieData.description,
         style: const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w500,
@@ -291,7 +288,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
                 child:
                     // Movie Type
                     Text(
-                  movieData.type,
+                  widget.movieData.type,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
@@ -311,7 +308,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
                     color: Colors.white.withOpacity(.1),
                     borderRadius: BorderRadius.circular(20)),
                 child: Text(
-                  "${movieData.age}+",
+                  "${widget.movieData.age}+",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
@@ -334,7 +331,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
                     text: "IMDb ",
                     children: [
                       TextSpan(
-                        text: "${movieData.imdb_point}",
+                        text: "${widget.movieData.imdb_point}",
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -382,7 +379,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
     return Container(
       padding: const EdgeInsets.only(top: 4),
       child: Text(
-        movieData.subtitle,
+        widget.movieData.subtitle,
         style: TextStyle(
           color: Colors.white.withOpacity(0.5),
         ),
@@ -394,7 +391,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
     return Container(
       padding: const EdgeInsets.only(top: 8),
       child: Text(
-        movieData.name,
+        widget.movieData.name,
         textAlign: TextAlign.center,
         style: const TextStyle(
           color: Colors.white,

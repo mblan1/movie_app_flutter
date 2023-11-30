@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test1/pages/homePage.dart';
 import 'package:test1/pages/loginPage.dart';
+import 'package:test1/pages/registerPage.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -13,11 +14,12 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginPage(),
+      home: const LoginPage(),
       debugShowCheckedModeBanner: false,
       routes: {
-        "/homePage": (context) => HomePage(),
-        "/loginPage": (context) => LoginPage(),
+        // "/homePage": (context) => HomePage(),
+        "/registerPage": (context) => const RegisterPage(),
+        "/loginPage": (context) => const LoginPage(),
       },
     );
   }

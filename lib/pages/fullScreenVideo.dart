@@ -7,15 +7,10 @@ class FullScreenPage extends StatefulWidget {
   const FullScreenPage({Key? key, required this.videoURL}) : super(key: key);
 
   @override
-  // ignore: no_logic_in_create_state
-  State<StatefulWidget> createState() =>
-      _FullScreenPageState(videoURL: videoURL);
+  State<StatefulWidget> createState() => _FullScreenPageState();
 }
 
 class _FullScreenPageState extends State<FullScreenPage> {
-  final String _videoURL;
-  _FullScreenPageState({required String videoURL}) : _videoURL = videoURL;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -52,7 +47,7 @@ class _FullScreenPageState extends State<FullScreenPage> {
             alignment: Alignment.center,
             children: [
               YoutubePlayerAppPage(
-                videoURL: _videoURL,
+                videoURL: widget.videoURL,
               ),
             ],
           )),

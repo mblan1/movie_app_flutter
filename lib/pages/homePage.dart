@@ -1,15 +1,19 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:test1/BottomBar/CustomBottomBar.dart';
+import 'package:test1/firebase/FirebaseService.dart';
 import 'package:test1/modals/movie.dart';
 import 'package:test1/modals/movie_type_catgory.dart';
 import 'package:test1/pages/movieDetail.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key, required this.user});
+
+  final User user;
 
   @override
   State<StatefulWidget> createState() {
@@ -224,7 +228,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => MovieDetailPage(
-                                movieCategory: movieData,
+                                movieData: movieData,
                               ),
                             ),
                           );
@@ -400,11 +404,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       title: Padding(
         padding: const EdgeInsets.only(left: 20),
         child: RichText(
-          text: const TextSpan(
+          text: TextSpan(
               text: 'Hello,',
               children: [
                 TextSpan(
-                    text: ' Jane',
+                    text: ' ${widget.user.displayName}',
                     style: TextStyle(fontWeight: FontWeight.bold))
               ],
               style: TextStyle(fontSize: 18)),
@@ -424,7 +428,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
         IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, "/loginPage");
+            FirebaseService.signOut();
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                '/loginPage', (Route<dynamic> route) => false);
           },
           icon: const Icon(
             Icons.logout,

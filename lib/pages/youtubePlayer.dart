@@ -9,14 +9,10 @@ class YoutubePlayerAppPage extends StatefulWidget {
 
   @override
   // ignore: no_logic_in_create_state
-  State<StatefulWidget> createState() =>
-      _YoutubePlayerAppState(videoURL: videoURL);
+  State<StatefulWidget> createState() => _YoutubePlayerAppState();
 }
 
 class _YoutubePlayerAppState extends State<YoutubePlayerAppPage> {
-  final String _videoURL;
-  _YoutubePlayerAppState({required String videoURL}) : _videoURL = videoURL;
-
   late YoutubePlayerController _controller;
   late TextEditingController _idController;
   late TextEditingController _seekToController;
@@ -27,7 +23,7 @@ class _YoutubePlayerAppState extends State<YoutubePlayerAppPage> {
 
   @override
   void initState() {
-    final videoID = YoutubePlayer.convertUrlToId(_videoURL);
+    final videoID = YoutubePlayer.convertUrlToId(widget.videoURL);
     // TODO: implement initState
     super.initState();
 
@@ -96,7 +92,7 @@ class _YoutubePlayerAppState extends State<YoutubePlayerAppPage> {
               // FullScreen.setFullScreen(true);
               _controller.pause();
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return FullScreenPage(videoURL: _videoURL);
+                return FullScreenPage(videoURL: widget.videoURL);
               }));
               // SystemChrome.setPreferredOrientations([
               //   DeviceOrientation.landscapeLeft,

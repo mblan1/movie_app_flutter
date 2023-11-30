@@ -1,14 +1,13 @@
-import 'dart:io';
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:test1/firebase/FirebaseService.dart';
 import 'package:test1/modals/login_method.dart';
 import 'package:test1/pages/homePage.dart';
+import 'package:test1/pages/loadingScreen.dart';
+import 'package:test1/pages/registerPage.dart';
+import 'package:test1/widget/reUseTextForm.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,17 +21,19 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? _user;
+  late User user;
+  late bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _auth.authStateChanges().listen((User? user) {
-      setState(() {
-        _user = user;
-      });
-    });
+  }
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _emailController.dispose();
+    super.dispose();
   }
 
   void showSnackBar(BuildContext context, String message,
@@ -68,24 +69,62 @@ class _LoginPageState extends State<LoginPage> {
           Color(0xff2B5876),
           Color(0xff4E4376),
         ])),
-        child: Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: [
-                thumbnail(),
-                title(),
+        child: Stack(children: [
+          Center(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                children: [
+                  thumbnail(),
+                  title(),
 
-                // Text Field
-                textForm(context),
+                  // Text Field
+                  textForm(context),
 
-                // login media
-                loginMethod(),
-              ],
+                  // login media
+                  loginMethod(),
+
+                  // register
+                  register(context),
+                ],
+              ),
+            ),
+          ),
+
+          // loading screen
+          if (isLoading) const LoadingScreen(),
+        ]),
+      ),
+    );
+  }
+
+  Row register(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
+          "Don't have an account ?",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const RegisterPage(),
+              ),
+            );
+          },
+          child: const Text(
+            "Register",
+            style: TextStyle(
+              color: Colors.white,
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 
@@ -153,88 +192,60 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: [
             // mail
-            TextFormField(
-              controller: _emailController,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.white,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.orange,
-                  ),
-                ),
-                border: OutlineInputBorder(),
-                labelText: 'Email',
-                labelStyle: TextStyle(color: Colors.white),
-                //
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your email';
-                } else if (!value.contains('@')) {
-                  return 'Please enter a valid email address';
-                } else if (value.length > 50) {
-                  return 'Email must be less than 50 characters';
-                }
-                return null;
-              },
+            ReUseTextForm(
+              textController: _emailController,
+              textLabel: "Email",
+              isHidingText: false,
+              inputName: "email",
             ),
 
             const SizedBox(height: 20),
 
             // password
-            TextFormField(
-              controller: _passwordController,
-              obscureText: true,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.white,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.orange,
-                  ),
-                ),
-                border: OutlineInputBorder(),
-                labelStyle: TextStyle(color: Colors.white),
-                labelText: 'Password',
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your password';
-                } else if (value.length < 6) {
-                  return 'Password must be at least 6 characters';
-                } else if (value.length > 20) {
-                  return 'Password must be less than 20 characters';
-                }
-                return null;
-              },
+            ReUseTextForm(
+              textController: _passwordController,
+              textLabel: "Password",
+              isHidingText: true,
+              inputName: "password",
             ),
+
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    FirebaseService.signUpWithEmailAndPassword(
+                    setState(() {
+                      isLoading = true;
+                    });
+                    await FirebaseService.signInWithEmailAndPassword(
                       _emailController.text,
                       _passwordController.text,
-                      onSuccess: () =>
-                          Navigator.pushReplacementNamed(context, '/homePage'),
-                      onError: () => showSnackBar(
-                        context,
-                        "Account already exist",
-                        backgroundColor: Colors.red,
-                      ),
-                    );
+                    ).then((user) {
+                      if (user != null) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(
+                              user: user,
+                            ),
+                          ),
+                        );
+                        setState(() {
+                          isLoading = false;
+                        });
+                      } else {
+                        setState(() {
+                          isLoading = false;
+                        });
+                        showSnackBar(
+                          context,
+                          "Login failed",
+                          backgroundColor: Colors.red,
+                        );
+                      }
+                    });
                   }
                 },
                 child: const Text('Login'),
