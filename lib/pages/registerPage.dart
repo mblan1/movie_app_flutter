@@ -146,7 +146,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       setState(() {
                         isLoading = false;
                       });
-                      WidgetVoid.showSnackBar(context, "Loi Dang Ky");
+                      WidgetVoid.showSnackBar(
+                          context, "Email hoac matt khau khong chinh xac");
                       print(error.toString());
                     },
                   );
