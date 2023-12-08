@@ -12,7 +12,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black.withOpacity(0.5),
-      child: Center(
+      child: const Center(
         child: CircularProgressIndicator(),
       ),
     );

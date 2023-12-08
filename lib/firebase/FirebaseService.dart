@@ -10,6 +10,7 @@ class FirebaseService {
   }
 
 // email
+  // sign up with email and password
   static Future<void> signUpWithEmailAndPassword(String email, String password,
       {String? userName}) async {
     try {
@@ -32,6 +33,7 @@ class FirebaseService {
     }
   }
 
+  // sign in with email and password
   static Future<User?> signInWithEmailAndPassword(
       String email, String password) async {
     try {
@@ -47,6 +49,22 @@ class FirebaseService {
     return null;
   }
 
+  // send email verification
+  static Future<void> sendVerificationEmail(User user) async {
+    await user.sendEmailVerification();
+  }
+
+  // reload user
+  static Future<User?> reloadUser() async {
+    final User? currentUser = _auth.currentUser;
+    if (currentUser != null) {
+      await currentUser.reload();
+      return currentUser;
+    }
+    return null;
+  }
+
+  // sign out
   static Future<void> signOut() async {
     await _auth.signOut();
   }

@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:test1/pages/mainPage.dart';
+import 'package:test1/pages/AuthScreen/login_page.dart';
+import 'package:test1/pages/AuthScreen/register_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,10 +23,14 @@ void main() async {
   runApp(
     MaterialApp(
       home: const SafeArea(
-        child: MainPage(),
+        child: LoginPage(),
       ),
       theme: ThemeData(fontFamily: "BeVietNamPro"),
       debugShowCheckedModeBanner: false,
+      routes: {
+        "/registerPage": (context) => const RegisterPage(),
+        "/loginPage": (context) => const LoginPage(),
+      },
     ),
   );
 }

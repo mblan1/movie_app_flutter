@@ -1,12 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:test1/firebase/FirebaseService.dart';
 import 'package:test1/modals/login_method.dart';
-import 'package:test1/pages/homePage.dart';
-import 'package:test1/pages/loadingScreen.dart';
-import 'package:test1/pages/registerPage.dart';
+import 'package:test1/pages/AuthScreen/email_verify_page.dart';
+import 'package:test1/pages/MovieScreen/home_page.dart';
+import 'package:test1/widget/loading_screen.dart';
+import 'package:test1/pages/AuthScreen/register_page.dart';
 import 'package:test1/widget/reUseTextForm.dart';
 
 class LoginPage extends StatefulWidget {
@@ -23,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
 
   late User user;
   late bool isLoading = false;
+  late bool isHidePassword = true;
 
   @override
   void initState() {
@@ -54,6 +57,26 @@ class _LoginPageState extends State<LoginPage> {
       FirebaseService.signInWithGoogle();
     } else {
       showSnackBar(context, elseMessage);
+    }
+  }
+
+  void handleLoginWithEmail(User user) {
+    if (user.emailVerified) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(
+            user: user,
+          ),
+        ),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MailVerifyPage(user: user),
+        ),
+      );
     }
   }
 
@@ -173,11 +196,7 @@ class _LoginPageState extends State<LoginPage> {
                     elseMessage:
                         "Tinh nang dang bao tri vui long dang nhap bang phuong thuc khac !",
                   );
-                }
-
-                // Navigator.pushReplacementNamed(
-                //     context, '/homePage'),
-                ),
+                }),
           );
         },
       ),
@@ -205,8 +224,14 @@ class _LoginPageState extends State<LoginPage> {
             ReUseTextForm(
               textController: _passwordController,
               textLabel: "Password",
-              isHidingText: true,
+              isHidingText: isHidePassword,
               inputName: "password",
+              isShowPasswordBtn: true,
+              onTogglePassword: () {
+                setState(() {
+                  isHidePassword = !isHidePassword;
+                });
+              },
             ),
 
             const SizedBox(height: 20),
@@ -224,26 +249,18 @@ class _LoginPageState extends State<LoginPage> {
                       _passwordController.text,
                     ).then((user) {
                       if (user != null) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(
-                              user: user,
-                            ),
-                          ),
-                        );
+                        handleLoginWithEmail(user);
                         setState(() {
                           isLoading = false;
                         });
                       } else {
+                        showSnackBar(
+                          context,
+                          "Email or password is incorrect !",
+                        );
                         setState(() {
                           isLoading = false;
                         });
-                        showSnackBar(
-                          context,
-                          "Login failed",
-                          backgroundColor: Colors.red,
-                        );
                       }
                     });
                   }

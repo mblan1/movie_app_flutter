@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test1/pages/fullScreenVideo.dart';
+import 'package:test1/pages/MovieScreen/fullScreenVideo.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubePlayerAppPage extends StatefulWidget {

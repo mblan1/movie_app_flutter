@@ -4,11 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:test1/BottomBar/CustomBottomBar.dart';
+import 'package:test1/widget/custom-bottom_bar.dart';
 import 'package:test1/firebase/FirebaseService.dart';
 import 'package:test1/modals/movie.dart';
 import 'package:test1/modals/movie_type_catgory.dart';
-import 'package:test1/pages/movieDetail.dart';
+import 'package:test1/pages/MovieScreen/movie_detail_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.user});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
-import 'package:test1/BottomBar/CustomBottomBar.dart';
+import 'package:test1/widget/custom-bottom_bar.dart';
 import 'package:test1/modals/movie.dart';
-import 'package:test1/pages/watchMoviePage.dart';
+import 'package:test1/pages/MovieScreen/watch_movie_page.dart';
 
 class MovieDetailPage extends StatefulWidget {
   final Movie movieData;
@@ -44,6 +44,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
             ),
           ),
           child: DraggableScrollableSheet(
+            initialChildSize: 0.3,
             minChildSize: 0.3,
             maxChildSize: 0.5,
             builder: (context, scrollController) {
