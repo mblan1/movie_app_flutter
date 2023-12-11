@@ -11,7 +11,7 @@ class FirebaseService {
 
 // email
   // sign up with email and password
-  static Future<void> signUpWithEmailAndPassword(String email, String password,
+  static Future<User?> signUpWithEmailAndPassword(String email, String password,
       {String? userName}) async {
     try {
       await _auth.createUserWithEmailAndPassword(
@@ -28,8 +28,14 @@ class FirebaseService {
 
         user = _auth.currentUser;
       }
+
+      return user;
     } catch (e) {
-      print(e);
+      if (e is FirebaseAuthException) {
+        print(e.message);
+        print(e.code);
+      }
+      return null;
     }
   }
 

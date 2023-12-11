@@ -49,7 +49,9 @@ class _MailVerifyPage extends State<MailVerifyPage> {
     super.dispose();
 
     // dispose timer
-    timer.cancel();
+    if (timer.isActive) {
+      timer.cancel();
+    }
   }
 
   void handleFocusChange(value) {

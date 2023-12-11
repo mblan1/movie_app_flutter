@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test1/firebase/FirebaseService.dart';
@@ -172,23 +174,30 @@ class _RegisterPageState extends State<RegisterPage> {
                         _passwordController.text,
                         userName: _usernameController.text,
                       ).then(
-                        (_) {
-                          user = _auth.currentUser!;
-                          handleSignUpWithEmail(user);
-                          setState(() {
-                            isLoading = false;
-                          });
+                        (user) {
+                          if (user != null) {
+                            handleSignUpWithEmail(user);
+                          } else {
+                            WidgetVoid.showSnackBar(
+                              context,
+                              "Email is already in use!",
+                              backgroundColor: Colors.red,
+                            );
+                          }
                         },
                       ).catchError(
                         (error) {
-                          setState(() {
-                            isLoading = false;
-                          });
                           WidgetVoid.showSnackBar(
-                              context, "Email hoac mat khau khong chinh xac!");
+                            context,
+                            "Something went wrong!",
+                            backgroundColor: Colors.red,
+                          );
                           print(error.toString());
                         },
                       );
+                      setState(() {
+                        isLoading = false;
+                      });
                     }
                   },
                   child: const Text("Register"),
