@@ -19,8 +19,7 @@ class MailVerifyPage extends StatefulWidget {
 
 class _MailVerifyPage extends State<MailVerifyPage> {
   late bool isLoading = false;
-  late bool isFirstSend;
-  late int _coolDownSecond;
+  late int _coolDownSecond = 0;
   late String? _hidedEmail;
   var isEmailVerified = false;
   var _isOnCoolDown = false;
@@ -34,13 +33,12 @@ class _MailVerifyPage extends State<MailVerifyPage> {
     hideEmailAddress(widget.user.email!);
     if (coolDownTime > 0) {
       setState(() {
-        isFirstSend = false;
+        _isOnCoolDown = true;
       });
       onCoolDown(coolDownTime);
     } else {
-      setState(() {
-        isFirstSend = true;
-      });
+      FirebaseService.sendVerificationEmail(widget.user);
+      onCoolDown(60);
     }
   }
 
@@ -298,13 +296,7 @@ class _MailVerifyPage extends State<MailVerifyPage> {
                             setState(() {
                               isLoading = true;
                             });
-                            if (isFirstSend) {
-                              await FirebaseService.sendVerificationEmail(user);
-                              onCoolDown(60);
-                              setState(() {
-                                isFirstSend = false;
-                              });
-                            } else if (!_isOnCoolDown) {
+                            if (!_isOnCoolDown) {
                               await FirebaseService.sendVerificationEmail(user);
                               onCoolDown(60);
                             }
@@ -313,11 +305,9 @@ class _MailVerifyPage extends State<MailVerifyPage> {
                             });
                           },
                           child: Text(
-                            isFirstSend
-                                ? "Send Verification"
-                                : _isOnCoolDown
-                                    ? "Wait $_coolDownSecond seconds to resend"
-                                    : "Resend verification mail",
+                            _isOnCoolDown
+                                ? "Wait $_coolDownSecond seconds to resend"
+                                : "Resend verification mail",
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
