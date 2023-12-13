@@ -99,7 +99,9 @@ class _YoutubePlayerAppState extends State<YoutubePlayerAppPage> {
               // FullScreen.setFullScreen(true);
               _controller.pause();
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return FullScreenPage(videoURL: widget.videoURL!);
+                return FullScreenPage(
+                  videoId: videoID,
+                );
               }));
               // SystemChrome.setPreferredOrientations([
               //   DeviceOrientation.landscapeLeft,

@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:test1/utils/youtubePlayer.dart';
 
 class FullScreenPage extends StatefulWidget {
-  final String videoURL;
-  const FullScreenPage({Key? key, required this.videoURL}) : super(key: key);
+  final String videoId;
+  const FullScreenPage({Key? key, required this.videoId}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _FullScreenPageState();
@@ -47,7 +47,7 @@ class _FullScreenPageState extends State<FullScreenPage> {
             alignment: Alignment.center,
             children: [
               YoutubePlayerAppPage(
-                videoURL: widget.videoURL,
+                videoId: widget.videoId,
               ),
             ],
           )),

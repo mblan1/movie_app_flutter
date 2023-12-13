@@ -259,6 +259,7 @@ class _LoginPageState extends State<LoginPage> {
                         showSnackBar(
                           context,
                           "Email or password is incorrect !",
+                          backgroundColor: Colors.red,
                         );
                         setState(() {
                           isLoading = false;
