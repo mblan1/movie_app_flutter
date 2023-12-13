@@ -17,6 +17,16 @@ class MovieDetailPage extends StatefulWidget {
 
 class _MovieDetailPage extends State<MovieDetailPage> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -72,17 +82,17 @@ class _MovieDetailPage extends State<MovieDetailPage> {
                       ),
 
                       // movie title
-                      MovieTitle(),
-                      MovieSubTitle(),
+                      movieTitle(),
+                      movieSubTitle(),
 
                       // Detail
-                      MovieDetail(),
+                      movieDetail(),
 
                       // movie description
-                      MovieDesc(),
+                      movieDesc(),
 
                       // CAST
-                      MovieCast(),
+                      movieCast(),
                     ]),
                   ),
                 ),
@@ -128,7 +138,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
     );
   }
 
-  Container MovieCast() {
+  Container movieCast() {
     // cast
     List<Cast> castData = widget.movieData.cast;
     return Container(
@@ -239,7 +249,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
     );
   }
 
-  Container MovieDesc() {
+  Container movieDesc() {
     return Container(
       padding: const EdgeInsets.only(top: 16),
       child: ReadMoreText(
@@ -269,7 +279,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
     );
   }
 
-  Container MovieDetail() {
+  Container movieDetail() {
     return Container(
       padding: const EdgeInsets.only(top: 16),
       child: Row(
@@ -376,7 +386,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
     );
   }
 
-  Container MovieSubTitle() {
+  Container movieSubTitle() {
     return Container(
       padding: const EdgeInsets.only(top: 4),
       child: Text(
@@ -388,7 +398,7 @@ class _MovieDetailPage extends State<MovieDetailPage> {
     );
   }
 
-  Container MovieTitle() {
+  Container movieTitle() {
     return Container(
       padding: const EdgeInsets.only(top: 8),
       child: Text(

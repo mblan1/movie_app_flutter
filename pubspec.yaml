@@ -43,6 +43,7 @@ dependencies:
     firebase_core: ^2.23.0
     firebase_auth: ^4.14.1
     flutter_launcher_icons: ^0.13.1
+    dio: ^5.4.0
 
 dev_dependencies:
     flutter_test:
@@ -75,7 +76,7 @@ flutter:
         - assets/suzume/
         - assets/gog/
         - assets/video/
-
+        - service.json
     # An image asset can refer to one or more resolution-specific "variants", see
     # https://flutter.dev/assets-and-images/#resolution-aware
 

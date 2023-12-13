@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:test1/pages/SearchScreen/search_screen.dart';
 import 'package:test1/widget/custom-bottom_bar.dart';
 import 'package:test1/firebase/FirebaseService.dart';
 import 'package:test1/modals/movie.dart';
@@ -341,6 +342,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 Border.all(color: const Color.fromRGBO(255, 255, 255, 0.20)),
           ),
           child: TextField(
+            keyboardType: TextInputType.none,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SearchPage(),
+                ),
+              );
+            },
             spellCheckConfiguration: const SpellCheckConfiguration.disabled(),
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(

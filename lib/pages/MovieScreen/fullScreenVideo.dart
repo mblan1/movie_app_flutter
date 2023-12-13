@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:test1/pages/youtubePlayer.dart';
+import 'package:test1/utils/youtubePlayer.dart';
 
 class FullScreenPage extends StatefulWidget {
   final String videoURL;

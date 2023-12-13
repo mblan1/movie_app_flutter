@@ -3,9 +3,13 @@ import 'package:test1/pages/MovieScreen/fullScreenVideo.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubePlayerAppPage extends StatefulWidget {
-  final String videoURL;
-  const YoutubePlayerAppPage({Key? key, required this.videoURL})
-      : super(key: key);
+  String? videoURL;
+  String? videoId;
+  YoutubePlayerAppPage({
+    Key? key,
+    this.videoURL,
+    this.videoId,
+  }) : super(key: key);
 
   @override
   // ignore: no_logic_in_create_state
@@ -20,15 +24,18 @@ class _YoutubePlayerAppState extends State<YoutubePlayerAppPage> {
   late PlayerState _playerState;
   late YoutubeMetaData _videoMetaData;
   bool _isPlayerReady = false;
+  late String videoID;
 
   @override
   void initState() {
-    final videoID = YoutubePlayer.convertUrlToId(widget.videoURL);
+    widget.videoId == null
+        ? videoID = YoutubePlayer.convertUrlToId(widget.videoURL!)!
+        : videoID = widget.videoId!;
     // TODO: implement initState
     super.initState();
 
     _controller = YoutubePlayerController(
-      initialVideoId: "$videoID",
+      initialVideoId: videoID,
       flags: const YoutubePlayerFlags(
         mute: false,
         autoPlay: true,
@@ -92,7 +99,7 @@ class _YoutubePlayerAppState extends State<YoutubePlayerAppPage> {
               // FullScreen.setFullScreen(true);
               _controller.pause();
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return FullScreenPage(videoURL: widget.videoURL);
+                return FullScreenPage(videoURL: widget.videoURL!);
               }));
               // SystemChrome.setPreferredOrientations([
               //   DeviceOrientation.landscapeLeft,

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:test1/api/apiRequest.dart';
 import 'package:test1/firebase/FirebaseService.dart';
 import 'package:test1/modals/login_method.dart';
 import 'package:test1/pages/AuthScreen/email_verify_page.dart';
@@ -54,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
   void handleLogin(bool condition, String route,
       {String elseMessage = "missing"}) {
     if (condition) {
+      // getHttp().then((data) => print(data.toString()));
       FirebaseService.signInWithGoogle();
     } else {
       showSnackBar(context, elseMessage);

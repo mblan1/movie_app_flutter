@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:test1/modals/movie.dart';
+import 'package:test1/modals/video.dart';
 import 'package:test1/utils/youtubePlayer.dart';
 
-class WatchMoviePage extends StatefulWidget {
-  final Movie movieData;
-  const WatchMoviePage({Key? key, required this.movieData}) : super(key: key);
+class WatchVideoPage extends StatefulWidget {
+  final Video videoData;
+  const WatchVideoPage({Key? key, required this.videoData}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _WatchMoviePageState();
+  State<StatefulWidget> createState() => _WatchVideoPage();
 }
 
-class _WatchMoviePageState extends State<WatchMoviePage> {
+class _WatchVideoPage extends State<WatchVideoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,19 +31,23 @@ class _WatchMoviePageState extends State<WatchMoviePage> {
         child: Column(
           children: [
             YoutubePlayerAppPage(
-              videoURL: widget.movieData.videoUrl,
+              videoId: widget.videoData.items[0].id,
             ),
             Container(
               padding: const EdgeInsets.all(16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    widget.movieData.name,
-                    style: const TextStyle(
-                        fontSize: 20,
+                  Expanded(
+                    child: Text(
+                      widget.videoData.items[0].snippet.title,
+                      style: const TextStyle(
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                        color: Colors.white,
+                        overflow: TextOverflow.clip,
+                      ),
+                    ),
                   ),
                   const Row(
                     children: [
