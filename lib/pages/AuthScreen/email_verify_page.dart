@@ -299,7 +299,20 @@ class _MailVerifyPage extends State<MailVerifyPage> {
                             if (!_isOnCoolDown) {
                               await FirebaseService.sendVerificationEmail(user);
                               onCoolDown(60);
+                              // ignore: use_build_context_synchronously
+                              WidgetVoid.showSnackBar(
+                                context,
+                                "Verification mail sent",
+                                backgroundColor: Colors.green,
+                              );
+                            } else {
+                              WidgetVoid.showSnackBar(
+                                context,
+                                "Please wait $_coolDownSecond seconds",
+                                backgroundColor: Colors.red,
+                              );
                             }
+
                             setState(() {
                               isLoading = false;
                             });

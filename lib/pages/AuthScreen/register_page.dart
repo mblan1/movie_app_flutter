@@ -170,9 +170,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       });
                       // confirm  register
                       await FirebaseService.signUpWithEmailAndPassword(
-                        _emailController.text,
-                        _passwordController.text,
-                        userName: _usernameController.text,
+                        _emailController.text.trim(),
+                        _passwordController.text.trim(),
+                        userName: _usernameController.text.trim(),
                       ).then(
                         (user) {
                           if (user != null) {

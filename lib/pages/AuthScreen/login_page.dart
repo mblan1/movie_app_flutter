@@ -247,8 +247,8 @@ class _LoginPageState extends State<LoginPage> {
                       isLoading = true;
                     });
                     await FirebaseService.signInWithEmailAndPassword(
-                      _emailController.text,
-                      _passwordController.text,
+                      _emailController.text.trim(),
+                      _passwordController.text.trim(),
                     ).then((user) {
                       if (user != null) {
                         handleLoginWithEmail(user);

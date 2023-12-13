@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:test1/api/apiRequest.dart';
 import 'package:test1/modals/video.dart';
@@ -214,7 +213,7 @@ class _SearchPageState extends State<SearchPage> {
                   } else {
                     setState(() {
                       isEmptyInput = false;
-                      valueEncoded = value.replaceAll(" ", "%20");
+                      valueEncoded = Uri.encodeComponent(value);
                     });
                     await getData(valueEncoded);
                   }
