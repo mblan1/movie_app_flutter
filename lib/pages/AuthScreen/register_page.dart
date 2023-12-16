@@ -47,7 +47,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void handleSignUpWithEmail(User user) {
     if (!user.emailVerified) {
-      FirebaseService.sendVerificationEmail(user);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
